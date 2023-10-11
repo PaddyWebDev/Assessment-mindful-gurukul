@@ -1,9 +1,8 @@
-import ValidatePassword from "@/pages/libraries/ValidatePassword";
-import Query from "../../libraries/DBconn";
-import { NextRequest, NextResponse } from "next/server";
-import { NextApiResponse } from "next";
+import ValidatePassword from "@/libraries/ValidatePassword";
+import Query from "@/libraries/DBconn";
+import { NextApiResponse, NextApiRequest } from "next";
 export default async function handler(
-  request: NextRequest,
+  request: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
@@ -16,10 +15,7 @@ export default async function handler(
     const HashedPassword: string = UserData.adminPassword;
     const isPasswordMatch = await ValidatePassword(password, HashedPassword);
     if (!isPasswordMatch) {
-      return NextResponse.json(
-        { message: "Invalid Password" },
-        { status: 403 }
-      );
+      return res.status(403).json({ message: "Invalid Password" });
     }
     res.status(200).json({
       message: "Login Success",

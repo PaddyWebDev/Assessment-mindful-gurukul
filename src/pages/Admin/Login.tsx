@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
+import HeadSection from '../components/HeadSection';
 export default function Login() {
     const router = useRouter();
     const [AdminData, SetAdminData] = useState({
@@ -22,6 +23,8 @@ export default function Login() {
     }
     return (
         <main className='min-h-screen p-1'>
+            <HeadSection />
+
             <form className=' md:w-[40vw] w-[80vw] mx-auto mt-[10vh]' onSubmit={handleSubmit}>
                 <h1 className='text-2xl mb-3'>Admin Login </h1>
                 <div className="mb-6">

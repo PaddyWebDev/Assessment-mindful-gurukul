@@ -4,9 +4,9 @@ import Navbar from '@/pages/components/Navbar';
 import { Pencil, Plus, Trash2, Eye } from 'lucide-react';
 import { useRouter } from 'next/router';
 import HeadSection from '../components/HeadSection';
+import Image from 'next/image';
 export default function Dashboard({ UserData }: any) {
     const router = useRouter()
-    const [State, SetState] = useState<number>(1)
     const [Users, SetUsers] = useState<Array<any>>(UserData)
 
     async function deleteUser(Id: number) {
@@ -30,9 +30,9 @@ export default function Dashboard({ UserData }: any) {
             <div className='mt-[5vh] flex items-center justify-end w-full'>
                 <button onClick={() => router.push('/Users/Add')} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 flex items-center justify-start gap-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add User <Plus /></button>
             </div>
-            <section className=' md:w-[50vw] mx-auto border mt-[6vh]   p-5'>
+            <section className=' md:w-[50vw] mx-auto     p-5'>
 
-                {Users && (
+                {Users && Users.length === 0 ? (<div className=' '><Image src={"/Images/NoDataFoundImg.jpg"} className='md:w-[30vw] w-[80vw ] object-contain mx-auto rounded-2xl' width={720} height={120} alt='' /></div>) : (
 
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -69,7 +69,7 @@ export default function Dashboard({ UserData }: any) {
                                                 <button onClick={() => router.push(`/Users/View?Id=${User.userId}`)} className=" hover:bg-gray-800   font-medium rounded-full text-sm p-3  text-[#fafafa]  dark:hover:bg-gray-700  " type="button">
                                                     <Eye />
                                                 </button>
-                                                <button onClick={() => { router.push(`/Users/Update?Id=${User.userId}`); SetState(State + 1) }} type="button" className="text-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full hover:text-[#fafafa] dark:hover:text-[#fafafa] text-sm p-2 mr-1 dark:text-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"> <Pencil /></button>
+                                                <button onClick={() => { router.push(`/Users/Update?Id=${User.userId}`) }} type="button" className="text-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full hover:text-[#fafafa] dark:hover:text-[#fafafa] text-sm p-2 mr-1 dark:text-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"> <Pencil /></button>
                                                 <button onClick={() => deleteUser(User.userId)} className="text-red-600 hover:bg-red-600 focus:hover:bg-red-600 dark:hover:bg-red-600 dark:focus:bg-red-600 dark:text-red-600 hover:text-[#fafafa] focus:text-[#fafafa] p-2 rounded-full" type="button">
                                                     <Trash2 />
                                                 </button>

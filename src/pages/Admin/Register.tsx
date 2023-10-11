@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
+import HeadSection from '../components/HeadSection';
+
 export default function Register() {
     const router = useRouter()
     const [AdminData, SetAdminData] = useState({
@@ -30,6 +32,7 @@ export default function Register() {
     }
     return (
         <>
+            <HeadSection />
             <main className='min-h-screen  p-2 '>
                 <form className=' md:w-[40vw] w-[80vw] mx-auto mt-[10vh]' onSubmit={HandleData}>
                     <h1 className='text-2xl mb-2'>Admin Register</h1>

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Query from "../../../libraries/DBconn";
+import Query from "@/libraries/DBconn";
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +14,8 @@ export default async function handler(
     const UpdateQuery: string =
       "UPDATE users SET userName = ? , userEmail = ? , userPhoneNum = ?, userGender = ? , City = ? , State = ? WHERE userId= ?";
 
-    const Values: Array<any> = [
+
+    const result = await Query(UpdateQuery, [
       userName,
       userEmail,
       userPhoneNum,
@@ -22,9 +23,7 @@ export default async function handler(
       City,
       State,
       Id,
-    ];
-
-    const result = await Query(UpdateQuery, Values);
+    ]);
     res.status(200).send({ result });
   } catch (error) {
     console.log(error);

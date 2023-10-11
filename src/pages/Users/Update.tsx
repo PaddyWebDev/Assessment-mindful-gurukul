@@ -50,16 +50,21 @@ export default function Update({ user, Id }: any) {
     const HandleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`/api/Users/update/${Id}`, { FormData })
-            alert(response.data.result.affectedRows > 0 ? 'Updated' : 'Already Updated');
-            SetFormData({
-                userName: '',
-                userEmail: '',
-                userPhoneNum: '',
-                City: '',
-                State: '',
-            })
-            router.push("/Admin/Dashboard")
+            if (FormData.userPhoneNum.length !== 10) {
+                alert("Phone Number should be 10 digits")
+            }
+            else {
+                const response = await axios.post(`/api/Users/update/${Id}`, { FormData })
+                alert(response.data.result.affectedRows > 0 ? 'Updated' : 'Already Updated');
+                SetFormData({
+                    userName: '',
+                    userEmail: '',
+                    userPhoneNum: '',
+                    City: '',
+                    State: '',
+                })
+                router.push("/Admin/Dashboard")
+            }
         } catch (error) {
             console.log(`Internal Server Error ${error}`);
         }

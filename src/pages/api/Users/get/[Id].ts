@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Query from "../../../libraries/DBconn";
+import Query from "@/libraries/DBconn";
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
